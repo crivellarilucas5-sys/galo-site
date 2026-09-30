@@ -1,0 +1,4 @@
+- [Ambiente e execução de comandos](env-execucao-comandos.md) — node/pnpm fora do PATH; `pnpm dev`/`start` travam; builds concorrentes de outros agentes corrompem `.next`; `${#var}` conta bytes.
+- [Evidência de QA com e sem browser](qa-evidencia-sem-browser.md) — Chrome real via CDP (teclado, foco, console, AX tree) + curl/CSS/leitura visual das imagens.
+- [Licença, fuso e alpha](checagens-imagem-licenca-fuso.md): CC BY-SA exige aviso de recorte; Intl sem timeZone no SSR (date-only exige UTC); contraste com opacity.
+- [Padrões de defeito do site do Galo](defeitos-recorrentes-site-galo.md) — 13 padrões: fix estrutural, "outro lado" da correção, recorte troca sujeito da foto, research contradiz a fonte.

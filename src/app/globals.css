@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens do Galo — Clube Atlético Mineiro (site de torcedor, não oficial).
+ * Fonte: docs/smart-memory/agents/ux/design-direction.md
+ * Tailwind v4 é CSS-first: os tokens vivem só aqui, nunca em tailwind.config.ts.
+ */
+@theme {
+  /* Superfícies escuras (tema padrão do site) */
+  --color-background: #0a0a0a;
+  --color-foreground: #ffffff;
+  --color-surface: #141414;
+  --color-surface-foreground: #ffffff;
+  --color-card: #141414;
+  --color-card-foreground: #ffffff;
+  --color-popover: #141414;
+  --color-popover-foreground: #ffffff;
+  /* Superfície elevada sobre --color-surface, usada só no card de opção
+   * correta do quiz (docs/smart-memory/agents/ux/quiz-design.md §1.3). */
+  --color-surface-raised: #1a1a1a;
+
+  /* Superfícies claras (seções de respiro editorial) */
+  --color-bg-light: #ffffff;
+  --color-fg-on-light: #0a0a0a;
+  --color-fg-on-light-muted: #4d4d4d;
+
+  /* Marca */
+  --color-primary: #c9a227;
+  --color-primary-foreground: #0a0a0a;
+  --color-secondary: #1f1f1f;
+  --color-secondary-foreground: #ffffff;
+  --color-accent: #c9a227;
+  --color-accent-foreground: #0a0a0a;
+  --color-accent-hover: #e0b830;
+
+  --color-muted: #141414;
+  --color-muted-foreground: #b3b3b3;
+
+  --color-destructive: #b3261e;
+  --color-destructive-foreground: #ffffff;
+
+  /* Erro do quiz (docs/smart-memory/agents/ux/quiz-design.md §1.3) — só
+   * ícone/borda/fundo sutil, nunca texto de corpo (mesma regra do dourado). */
+  --color-error: #d64545;
+  --color-error-bg: #2a1414;
+
+  --color-border: #2a2a2a;
+  --color-border-light: #e0e0e0;
+  --color-input: #2a2a2a;
+  --color-ring: #c9a227;
+
+  /* Tipografia */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-oswald);
+  --font-heading: var(--font-oswald);
+  --font-serif-display: var(--font-playfair);
+
+  /* Raio */
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+
+  /* Breakpoint wide usado no grid de títulos (ux: 1440px+) */
+  --breakpoint-wide: 1440px;
+}
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem; /* 1280px */
+  padding-inline: 1.5rem;
+
+  @variant md {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Seção com fundo claro (respiro editorial) — usar dentro de sections/*. */
+@utility section-light {
+  background-color: var(--color-bg-light);
+  color: var(--color-fg-on-light);
+}
+
+/*
+ * Bloco de imagem do card de jogador (goleiro) — padrão de linhas diagonais
+ * sutis atrás da silhueta/número, conforme
+ * docs/smart-memory/agents/ux/elenco-jogos-refresh.md §1 (opacity 0.06,
+ * nenhuma cor nova fora da paleta: usa --color-foreground do próprio tema).
+ */
+@utility squad-card-block--goleiro {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--color-foreground) 0,
+      var(--color-foreground) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  }
+}
+
+/*
+ * Grid de duas colunas da seção "Jogos" (next-match.tsx) — usa
+ * grid-template-areas (não a propriedade CSS `order`) para posicionar o
+ * bloco "Próximo jogo" à direita em desktop mantendo a ordem de DOM/leitura
+ * igual em todos os breakpoints (design-direction §4.4 e
+ * elenco-jogos-refresh.md §2: Próximo jogo primeiro no DOM, sempre).
+ */
+@utility jogos-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-areas: "next" "results" "upcoming";
+
+  @variant md {
+    grid-template-columns: 1fr 1.4fr;
+    align-items: start;
+    grid-template-areas: "results next" "upcoming next";
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  /* Foco visível obrigatório (design-direction §4) — nunca outline: none sem substituto. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Skip link — primeiro elemento focável da página (story 1.2, AC8). */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: top 150ms ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}

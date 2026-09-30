@@ -1,0 +1,5 @@
+- [Setup de ambiente Node/pnpm/shadcn/lucide/Chrome nesta máquina](project_env_setup.md) — PATH manual, pnpm@9 (não @12), shadcn `-b radix`, ícones de marca removidos do lucide-react.
+- [Padrão RevealGroup/RevealItem para performance em grids](project_perf_pattern.md) — evita TBT alto; SSR-safe (nunca serializa opacity:0) + checagem síncrona de viewport para não piscar na hidratação.
+- [Regra de alt="" para placeholders genéricos + JSON-LD WebSite/about](project_alt_and_jsonld_patterns.md) — nunca afirmar identidade que a imagem/domínio não tem.
+- [Grid-area em vez de `order` para reordenar visualmente por breakpoint](project_grid_area_no_order.md) — mantém ordem de tab/leitura fixa (design-direction §4.4); usado em next-match.tsx.
+- [aria-live num nó reaproveitado pelo React precisa existir antes do conteúdo](project_aria_live_persistent_region.md) — nunca criar o atributo no mesmo commit do texto; region incondicional + useState + useEffect.

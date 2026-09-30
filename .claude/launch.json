@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "galo-site-dev",
+      "runtimeExecutable": "C:\\Users\\crive\\Mentoria Claude\\test\\.claude\\dev-server.bat",
+      "runtimeArgs": [],
+      "port": 3000
+    },
+    {
+      "name": "erika-book-landing",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "erika-book-landing", "-l", "4321"],
+      "port": 4321
+    }
+  ]
+}

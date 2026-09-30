@@ -1,0 +1,1 @@
+- [Direção visual — Atlético Mineiro](project_atletico-mineiro-visual-direction.md) — paleta preto/branco/dourado, tipografia, specs de componente já entregues em smart-memory/agents/ux/
